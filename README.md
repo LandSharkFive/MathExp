@@ -16,12 +16,11 @@ The is a C# Console-Mode Project. Use Visual Studio 2022 and above to compile.
  
 ## Exit Application
 
-  Enter an empty line in the operator field.
+  Enter an empty line.
 
 ## Unit Tests
 
   Unit Tests are included.
-
 
 ## Operators
 
@@ -122,7 +121,7 @@ The is a C# Console-Mode Project. Use Visual Studio 2022 and above to compile.
 ### Least Common Multiple
 
 ```
-> LCM(13342, 234334)"
+> LCM(13342, 234334)
 1563242114
 ```
 
@@ -162,9 +161,18 @@ The is a C# Console-Mode Project. Use Visual Studio 2022 and above to compile.
 0.3398089438635673
 ```
 
+## Binding Variables
 
+  Variables can be bound at the source code level.  Use the Bind() function.
 
-
+```
+ var str = "A * B - C";
+ Util util = new Util();
+ string result = util.Bind(str, "A", 22.1);
+ result = util.Bind(result, "B", 17.4);
+ result = util.Bind(result, "C", 66.45);
+ Assert.AreEqual("22.1 * 17.4 - 66.45", result);
+```
 
 
 
