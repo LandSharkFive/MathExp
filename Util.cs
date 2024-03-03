@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Text;
 
 
 namespace RpnOne
@@ -26,7 +27,7 @@ namespace RpnOne
 
         public List<string> Tokenize(string a)
         {
-            var strDelimit = "()+-*/%^,@";
+            var strDelimit = "()+-*/%^,@!";
             var delimiters = strDelimit.ToCharArray();
             var buffer = string.Empty;
             var result = new List<string>();
@@ -100,6 +101,7 @@ namespace RpnOne
                     case "%":
                     case "^":
                     case "@":
+                    case "!":
                         while (opStk.Count > 0 && Precedence(token) <= Precedence(opStk.Peek()))
                         {
                             string op = opStk.Pop();
@@ -136,7 +138,7 @@ namespace RpnOne
 
         public int Precedence(string op)
         {
-            if (op == "@")
+            if (op == "@" || op == "!")
                 return 4;
             if (op == "^")
                 return 3;
@@ -175,7 +177,7 @@ namespace RpnOne
             string str = "A ACOS ASIN ATAN ALG ALN CB COS CL CR DEG EN F";
             list.AddRange(str.Split(" ").ToList());
 
-            str = "FL GCF I LCM LG LN MIN MAX P2 PI R RAD RAN";
+            str = "FL GCF I LCM LG LN MIN MAX PD P2 PI R RAD RAN";
             list.AddRange(str.Split(" ").ToList());
 
             str = "RD RND RT S SIN SQ SR AN TAU X2 X3";
@@ -260,6 +262,10 @@ namespace RpnOne
                         result = -numStk.Pop();
                         numStk.Push(result);
                         break;
+                    case "!":
+                        result = Factorial(numStk.Pop());
+                        numStk.Push(result);
+                        break;
                     case "A":
                         result = Math.Abs(numStk.Pop());
                         numStk.Push(result);
@@ -340,12 +346,19 @@ namespace RpnOne
                         break;
                     case "MIN":
                         result = Math.Min(numStk.Pop(), numStk.Pop());
+                        numStk.Push(result);    
                         break;
                     case "MAX":
                         result = Math.Max(numStk.Pop(), numStk.Pop());
+                        numStk.Push(result);
                         break;
                     case "P2":
                         result = Math.Pow(2, numStk.Pop());
+                        numStk.Push(result);
+                        break;
+                    case "PD":
+                        result = PrimeDivisor(Clamp(numStk.Pop()));
+                        numStk.Push(result);
                         break;
                     case "PI":
                         result = Math.PI;
@@ -479,6 +492,25 @@ namespace RpnOne
             return str.Replace(name, value.ToString());
         }
 
+        public double Factorial(double value)
+        {
+            if (value <= 1.0)
+            {
+                return 1.0;
+            }
+            if (value > 170.0)
+            {
+                return 0.0;
+            }
+
+            double result = 1.0;
+            for (int i = 1; i <= value; i++)
+            {
+                result *= i;
+            }
+
+            return result;
+        }
 
         private static int GCF(double a, double b)
         {
@@ -512,6 +544,28 @@ namespace RpnOne
         private static int LCMInner(int a, int b)
         {
             return (a / GCF(a, b)) * b;
+        }
+
+        // Prime Divisor.
+        // If prime, return 0.
+        private int PrimeDivisor(int n)
+        {
+            // By definition, zero and one are not prime numbers.
+            if (n < 2)
+            {
+                return 0;
+            }
+
+            int max = (int)Math.Sqrt(n);
+            for (int i = 2; i <= max; i++)
+            {
+                if (n % i == 0)
+                {
+                    return i;
+                }
+            }
+
+            return 0;
         }
     }
 }
