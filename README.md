@@ -126,14 +126,14 @@ The is a C# Console-Mode Project. Use Visual Studio 2022 and above to compile.
 ```
 
 
-### Greatest Common Multiple
+### Greatest Common Factor
 
 ```
 > GCF(13342, 234334)
 2
 ```
 
-### PI
+### Pi
 
 ```
 > 6 * PI
