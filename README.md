@@ -77,12 +77,14 @@ Enter an empty line.
 | / | divide |
 | % | modulus |
 | ^ | power, a ^ b |
+| @ | negation |
 | ! | factorial |
 | A |  absolute value |
 | ACOS | anti-cosine |
 | ASIN | anti-sine |
 | ATAN | anti-tangent |
 | CB | cube, a ^ 3 |
+| CDF | Cumulative Density Function |
 | CL | Ceiling |
 | COS | Cosine in radians |
 | CR | Cube root, EXP(a, 1 / 3) |
@@ -95,6 +97,8 @@ Enter an empty line.
 | LCM | Least Common Multiple |
 | LG | Base 10 Logarithm, 10 ^ a |
 | LN | Natural Logarithm, e ^ a |
+| NCR | Combinations |
+| NPR | Permutations |
 | P2 | power of two, 2 ^ a |
 | PD | Prime Divisor |
 | PI | half rotation in radians 3.14 |
@@ -107,6 +111,7 @@ Enter an empty line.
 | S | Change Sign |
 | SIN | sine in radians |
 | SR | square root, SQRT(a) |
+| STU | Student T-Distribution |
 | TAN | tangent in radians |
 | TAU | full rotation in radians 6.28 |
 | X2 | square, a * a |
