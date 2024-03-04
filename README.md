@@ -51,7 +51,7 @@ Send Text File into Application in PowerShell
 >
 ```
 
-Send Text Files into Application in CMD
+Send Text File into Application in CMD and make output file.
 ```
 rpnone < test1.txt > out1.txt
 ```
