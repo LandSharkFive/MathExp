@@ -17,6 +17,12 @@
                     break; 
                 }
 
+                if (Console.IsInputRedirected)
+                {
+                    // Echo 
+                    Console.WriteLine(input);
+                }
+
                 try
                 {
                     result = util.Eval(input);

@@ -180,7 +180,7 @@ namespace RpnOne
             str = "FL GCF I LCM LG LN MIN MAX PD P2 PI R RAD RAN";
             list.AddRange(str.Split(" ").ToList());
 
-            str = "RD RND RT S SIN SQ SR AN TAU X2 X3";
+            str = "RD RND RT S SIN SQ SR TAN TAU X2 X3";
             list.AddRange(str.Split(" ").ToList());
 
             return list;

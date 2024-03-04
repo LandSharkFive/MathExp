@@ -246,5 +246,77 @@ namespace TestOne
             result = util.Bind(result, "C", 66.45);
             Assert.AreEqual(result = "22.1 * 17.4 - 66.45", result);
         }
+
+        [TestMethod]
+        public void EvalSub1()
+        {
+            Util util = new Util();
+            var str = "4.0 - 6.0";
+            double result = util.Eval(str);
+            Assert.AreEqual(-2.0, result);
+        }
+
+        [TestMethod]
+        public void EvalMul3()
+        {
+            Util util = new Util();
+            var str = "6.0 * 7.0";
+            double result = util.Eval(str);
+            Assert.AreEqual(42, result);
+        }
+
+        [TestMethod]
+        public void Div3()
+        {
+            Util util = new Util();
+            var str = "3.0 / 2.0";
+            double result = util.Eval(str);
+            Assert.AreEqual(1.5, result);
+        }
+
+        [TestMethod]
+        public void EvalFactor3()
+        {
+            Util util = new Util();
+            var str = "3.0 / (-2.0)";
+            double result = util.Eval(str);
+            Assert.AreEqual(-1.5, result);
+        }
+
+        [TestMethod]
+        public void EvalFactor5()
+        {
+            Util util = new Util();
+            var str = "-3.0 / 2.0";
+            double result = util.Eval(str);
+            Assert.AreEqual(-1.5, result);
+        }
+
+        [TestMethod]
+        public void EvalMedium7()
+        {
+            Util util = new Util();
+            var str = "SR(X2(22.4) + X2(36.33))";
+            double result = util.Eval(str);
+            Assert.AreEqual(1342.2689, result, 0.001);
+        }
+
+        [TestMethod]
+        public void EvalGCF2()
+        {
+            Util util = new Util();
+            var str = "GCF(53982, 39321)";
+            double result = util.Eval(str);
+            Assert.AreEqual(9, result);
+        }
+
+        [TestMethod]
+        public void EvalLCM2()
+        {
+            Util util = new Util();
+            var str = "LCM(53982, 39321)";
+            double result = util.Eval(str);
+            Assert.AreEqual(235847358, result);
+        }
     }
 }
