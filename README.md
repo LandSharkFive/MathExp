@@ -1,6 +1,6 @@
 # Math Expressions Calculator
 
-This project contains a command line expression calculator.  The application reads one line at a time from the command line and calculates a result.  The result is printed to the screen.  The main function is called Eval().  Eval() takes the math expression and does three operations:  1. Tokenize() 2. InfixToPostFix() 3. EvalPostFix().  You can use Copy and Paste (Ctrl-C and Shift-Insert) on the command line.
+This project contains a command line expression calculator.  The application reads one line at a time from the command line and calculates a result.  The result is printed to the screen.  The main function is called Eval().  Eval() takes the math expression and does three operations:  1. Tokenize() 2. InfixToPostFix() 3. EvalPostFix().  You can use Copy and Paste (Ctrl-C and Shift-Insert) on the command line.  
 
 ## Install and Build
 
@@ -11,12 +11,57 @@ The is a C# Console-Mode Project. Use Visual Studio 2022 and above to compile.
   Command-Line Calculator.  Calculate one math expression per line.
 
 ## Usage:
-	RpnOne 
+Interactive
+```
+RpnOne
+```
+
+Do Math on Command-Line in PowerShell
+```
+ "1 + 2" | ./rpnone
+> 1 + 2
+3
+```
+
+Do Math on Command-Line in CMD
+```
+echo 1 + 2 | rpnone
+> 1 + 2
+3
+>
+```
+
+Send Text File into Application in PowerShell
+```
+ Get-Content ./test1.txt | ./rpnone
+> 1 + 2
+3
+> 3 + 4
+7
+> 10 + 20 + 30
+60
+> 10 - 50
+-40
+> COS(RAD(45))
+0.7071067811865476
+> COS(RAD(32.1))
+0.8471219213821372
+> SR(X2(22.4) + X2(36.33))
+1342.2689
+>
+```
+
+Send Text Files into Application in CMD
+```
+rpnone < test1.txt > out1.txt
+```
 
  
 ## Exit Application
-
-  Enter an empty line.
+```
+Enter an empty line.
+```
+   
 
 ## Unit Tests
 
@@ -69,21 +114,21 @@ The is a C# Console-Mode Project. Use Visual Studio 2022 and above to compile.
 
 ## EXAMPLES
 
-### Add 1 and 2:  3
+### Add 1 and 2
 
 ```
 > 1 + 2
 3
 ```
 
-### Subtract 5 - 3:  2
+### Subtract 5 - 3
 
 ```
 > 5 - 3
 2
 ```
 
-### Multipy 4 and 5:  20
+### Multipy 4 and 5
 
 ```
 > 4 * 5
