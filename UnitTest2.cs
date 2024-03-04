@@ -133,6 +133,59 @@ namespace TestOne
             Assert.AreEqual(1024, result);
         }
 
+        [TestMethod]
+        public void EvalCombo1()
+        {
+            Util util = new Util();
+            var str = "NCR(6,2)";
+            double result = util.Eval(str);
+            Assert.AreEqual(15, result);
+        }
+
+        [TestMethod]
+        public void EvalPerm1()
+        {
+            Util util = new Util();
+            var str = "NPR(6,2)";
+            double result = util.Eval(str);
+            Assert.AreEqual(30, result);
+        }
+
+        [TestMethod]
+        public void EvalCDF1()
+        {
+            Util util = new Util();
+            var str = "CDF(0)";
+            double result = util.Eval(str);
+            Assert.AreEqual(0.5, result, 1e-4);
+        }
+
+        [TestMethod]
+        public void EvalCDF2()
+        {
+            Util util = new Util();
+            var str = "CDF(1)";
+            double result = util.Eval(str);
+            Assert.AreEqual(0.841344, result, 1e-4);
+        }
+
+        [TestMethod]
+        public void EvalSTU1()
+        {
+            Util util = new Util();
+            var str = "STU(1, 10)";
+            double result = util.Eval(str);
+            Assert.AreEqual(0.3409, result, 1e-4);
+        }
+
+        [TestMethod]
+        public void EvalSTU2()
+        {
+            Util util = new Util();
+            var str = "STU(0.5, 10)";
+            double result = util.Eval(str);
+            Assert.AreEqual(0.6279, result, 1e-4);
+        }
 
     }
 }

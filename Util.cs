@@ -174,13 +174,13 @@ namespace RpnOne
         {
             List<string> list = new List<string>();
 
-            string str = "A ACOS ASIN ATAN ALG ALN CB COS CL CR DEG EN F";
+            string str = "A ACOS ASIN ATAN ALG ALN CB CDF COS CL CR DEG EN F";
             list.AddRange(str.Split(" ").ToList());
 
-            str = "FL GCF I LCM LG LN MIN MAX PD P2 PI R RAD RAN";
+            str = "FL GCF I LCM LG LN MIN MAX NCR NPR PD P2 PI R RAD RAN";
             list.AddRange(str.Split(" ").ToList());
 
-            str = "RD RND RT S SIN SQ SR TAN TAU X2 X3";
+            str = "RD RND RT S SIN SQ SR STU TAN TAU X2 X3";
             list.AddRange(str.Split(" ").ToList());
 
             return list;
@@ -295,6 +295,11 @@ namespace RpnOne
                         result = result * result * result;
                         numStk.Push(result);
                         break;
+                    case "CDF":
+                        result = numStk.Pop();
+                        result = CumDensity(result);
+                        numStk.Push(result);
+                        break;
                     case "CL":
                         result = Math.Ceiling(numStk.Pop());
                         numStk.Push(result);
@@ -352,6 +357,18 @@ namespace RpnOne
                         result = Math.Max(numStk.Pop(), numStk.Pop());
                         numStk.Push(result);
                         break;
+                    case "NCR":
+                        y = numStk.Pop();
+                        x = numStk.Pop();
+                        result = Combinations(x, y);
+                        numStk.Push(result);
+                        break;
+                    case "NPR":
+                        y = numStk.Pop();
+                        x = numStk.Pop();
+                        result = Permutations(x, y);
+                        numStk.Push(result);
+                        break;
                     case "P2":
                         result = Math.Pow(2, numStk.Pop());
                         numStk.Push(result);
@@ -405,6 +422,12 @@ namespace RpnOne
                         break;
                     case "SR":
                         result = Math.Sqrt(numStk.Pop());
+                        numStk.Push(result);
+                        break;
+                    case "STU":
+                        y = numStk.Pop();
+                        x = numStk.Pop();
+                        result = Student(x, y);
                         numStk.Push(result);
                         break;
                     case "TAN":
@@ -567,6 +590,143 @@ namespace RpnOne
 
             return 0;
         }
+
+        private double Combinations(double n, double r)
+        {
+            return Factorial(n) / (Factorial(r) * Factorial(n - r));
+        }
+
+        private double Permutations(double n, double r)
+        {
+            return Factorial(n) / Factorial(n - r);
+        }
+
+        /// <summary>
+        /// CDF - Cumulative Density Function for the Standard Normal Distribution.
+        /// </summary>
+        /// <param name="z">z-score</param>
+        /// <returns>cumulative probability density</returns>
+        // Output is always between zero and one.  Z-Score is generally between -4.0 and 4.0.
+        // When z is above 4.0, cdf is one. When z is below -4.0, cdf is zero.  
+        private static double CumDensity(double z)
+        {
+            double p = 0.3275911;
+            double a1 = 0.254829592;
+            double a2 = -0.284496736;
+            double a3 = 1.421413741;
+            double a4 = -1.453152027;
+            double a5 = 1.061405429;
+
+            int sign = 1;
+            if (z < 0.0)
+            {
+                sign = -1;
+            }
+
+            double x = Math.Abs(z) / Math.Sqrt(2.0);
+            double t = 1.0 / (1.0 + p * x);
+            double erf = 1.0 - (((((a5 * t + a4) * t) + a3)
+              * t + a2) * t + a1) * t * Math.Exp(-x * x);
+            return 0.5 * (1.0 + sign * erf);
+        } // CumDensity()
+
+
+        /// <summary>
+        /// Student's T-Distribution
+        /// </summary>
+        /// <param name="t">t-score</param>
+        /// <param name="df">degrees of freedom</param>
+        /// <returns>2-tail probability</returns>
+
+        private static double Student(double t, double df)
+        {
+            // for large int df or double df
+
+            // Adapted from ACM algorithm 395
+            // Returns 2-tail probability.
+            // For 1-tail probability, divide by two.
+
+            double n = df; // to sync with ACM parameter name
+            double a, b, y;
+
+            t = t * t;
+            y = t / n;
+            b = y + 1.0;
+            if (y > 1.0E-6)
+            {
+                y = Math.Log(b);
+            }
+            a = n - 0.5;
+            b = 48.0 * a * a;
+            y = a * y;
+
+            y = (((((-0.4 * y - 3.3) * y - 24.0) * y - 85.5) /
+              (0.8 * y * y + 100.0 + b) +
+                y + 3.0) / b + 1.0) * Math.Sqrt(y);
+
+            return 2.0 * Gauss(-y);
+        } // Student
+
+        /// <summary>
+        /// Gaussian Probability Density Function
+        /// </summary>
+        /// <param name="z">z-score</param>
+        /// <returns>probability density</returns>
+        private static double Gauss(double z)
+        {
+            // input = z-value (-inf to +inf)
+            // output = p under Normal curve from -inf to z
+            // e.g., if z = 0.0, function returns 0.5000
+            // ACM Algorithm #209
+            double y; // 209 scratch variable
+            double p; // result. called 'z' in 209
+            double w; // 209 scratch variable
+
+            if (z == 0.0)
+            {
+                p = 0.0;
+            }
+            else
+            {
+                y = Math.Abs(z) / 2;
+                if (y >= 3.0)
+                {
+                    p = 1.0;
+                }
+                else if (y < 1.0)
+                {
+                    w = y * y;
+                    p = ((((((((0.000124818987 * w
+                      - 0.001075204047) * w + 0.005198775019) * w
+                      - 0.019198292004) * w + 0.059054035642) * w
+                      - 0.151968751364) * w + 0.319152932694) * w
+                      - 0.531923007300) * w + 0.797884560593) * y * 2.0;
+                }
+                else
+                {
+                    y = y - 2.0;
+                    p = (((((((((((((-0.000045255659 * y
+                      + 0.000152529290) * y - 0.000019538132) * y
+                      - 0.000676904986) * y + 0.001390604284) * y
+                      - 0.000794620820) * y - 0.002034254874) * y
+                      + 0.006549791214) * y - 0.010557625006) * y
+                      + 0.011630447319) * y - 0.009279453341) * y
+                      + 0.005353579108) * y - 0.002141268741) * y
+                      + 0.000535310849) * y + 0.999936657524;
+                }
+            }
+
+            if (z > 0.0)
+            {
+                return (p + 1.0) / 2;
+            }
+            else
+            {
+                return (1.0 - p) / 2;
+            }
+        } // Gauss()
+
+
     }
 }
 
