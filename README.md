@@ -11,14 +11,20 @@ The is a C# Console-Mode Project. Use Visual Studio 2022 and above to compile.
   Command-Line Calculator.  Calculate one math expression per line.
 
 ## Usage:
-Interactive
+Shell
 ```
 RpnOne
 ```
 
+Read File
+```
+RpnOne [inFile]
+Input File is optional.
+```
+
 Do Math on Command-Line in PowerShell
 ```
- "1 + 2" | ./rpnone
+echo "1 + 2" | ./rpnone
 > 1 + 2
 3
 ```
@@ -31,29 +37,9 @@ echo 1 + 2 | rpnone
 >
 ```
 
-Send Text File into Application in PowerShell
+Help
 ```
- Get-Content ./test1.txt | ./rpnone
-> 1 + 2
-3
-> 3 + 4
-7
-> 10 + 20 + 30
-60
-> 10 - 50
--40
-> COS(RAD(45))
-0.7071067811865476
-> COS(RAD(32.1))
-0.8471219213821372
-> SR(X2(22.4) + X2(36.33))
-1342.2689
->
-```
-
-Send Text File into Application in CMD and make output file.
-```
-rpnone < test1.txt > out1.txt
+RpnOne -h
 ```
 
  
@@ -69,53 +55,53 @@ Enter an empty line.
 
 ## Operators
 
-| Operator | Description |
-| --- | --- |
-| + | add|
-| - | subtract |
-| * | multiply |
-| / | divide |
-| % | modulus |
-| ^ | power, a ^ b |
-| @ | negation |
-| ! | factorial |
-| A |  absolute value |
-| ACOS | anti-cosine |
-| ASIN | anti-sine |
-| ATAN | anti-tangent |
-| CB | cube, a ^ 3 |
-| CDF | Cumulative Density Function |
-| CL | Ceiling |
-| COS | Cosine in radians |
-| CR | Cube root, EXP(a, 1 / 3) |
-| DEG | radians to degrees |
-| EN | Euler's Number 2.71 |
-| F | fraction |
-| FL | Floor |
-| GCF | Greatest Common Factor |
-| I | Integer |
-| LCM | Least Common Multiple |
-| LG | Base 10 Logarithm, 10 ^ a |
-| LN | Natural Logarithm, e ^ a |
-| NCR | Combinations |
-| NPR | Permutations |
-| P2 | power of two, 2 ^ a |
-| PD | Prime Divisor |
-| PI | half rotation in radians 3.14 |
-| R | reciprocal, 1 / x |
-| RAD | degrees to radians |
-| RAN | Random Integer |
-| RD | Round |
-| RND | Random Double Between One and Zero |
-| RT | Nth Root, EXP(a, 1 / b) |
-| S | Change Sign |
-| SIN | sine in radians |
-| SR | square root, SQRT(a) |
-| STU | Student T-Distribution |
-| TAN | tangent in radians |
-| TAU | full rotation in radians 6.28 |
-| X2 | square, a * a |
-| X3 | cube, a ^ 3 |
+| Operator | Description | Example |
+| --- | --- | --- |
+| + | Add | 1 + 2 |
+| - | Subtract | 5 - 2 |
+| * | Multiply | 2 * 7 |
+| / | Divide | 30 / 3 |
+| % | Modulus | 15 % 3 |
+| ^ | Power, a ^ b | 3 ^ 2 |
+| @ | Negate | -5 |
+| ! | Factorial | 6! |
+| A |  Asolute Value | A(-5) |
+| ACOS | Anti-Cosine | ACOS(0.3) |
+| ASIN | Anti-Sine | ASIN(0.4) |
+| ATAN | Anti-Tangent | ATAN(0.5) |
+| CB | Cube, a ^ 3 | CB(5) |
+| CDF | Cumulative Density Function |  CDF(0.5) |
+| CL | Ceiling | CL(7.25) |
+| COS | Cosine in radians | COS(0.6) |
+| CR | Cube root, EXP(a, 1 / 3) |  CR(15) |
+| DEG | Radians To Degrees | DEG(45) |
+| EN | Euler's Number 2.71 | EN |
+| F | Fraction |  F(2.34) |
+| FL | Floor |  FL(7.63) |
+| GCF | Greatest Common Factor |  GCF(3, 21) |
+| I | Integer |  I(72.34) |
+| LCM | Least Common Multiple |  LCM(5, 125) |
+| LG | Base 10 Logarithm, 10 ^ a |  LG(25) |
+| LN | Natural Logarithm, e ^ a | LN(35) |
+| NCR | Combinations | NCR(6, 2) |
+| NPR | Permutations | NPR(6, 2) |
+| P2 | Power of two, 2 ^ a | P2(6) |
+| PD | Prime Divisor | PD(55555) |
+| PI | Half rotation in radians 3.14 | PI |
+| R | Reciprocal, 1 / x |  R(16.25) |
+| RAD | Degrees To Rdians |  RAD(0.785) |
+| RAN | Random Integer | RAN |
+| RD | Round | RD(3.34) |
+| RND | Random Double Between One and Zero | RND |
+| RT | Nth Root, EXP(a, 1 / b) |  RT(38, 4)
+| S | Change Sign | S(-5) |
+| SIN | Sine in radians |  SIN(0.83) |
+| SR | Square Root, SQRT(a) | SR(25) |
+| STU | Student T-Distribution |  STU(1) |
+| TAN | Tangent in radians | TAN(0.35) |
+| TAU | Full rotation in radians 6.28 | TAU |
+| X2 | Square, a * a |  X2(3) |
+| X3 | Cube, a ^ 3 | X3(5) |
 
 ## EXAMPLES
 
