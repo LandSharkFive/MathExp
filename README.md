@@ -97,7 +97,7 @@ Enter an empty line.
 | S | Change Sign | S(-5) |
 | SIN | Sine in radians |  SIN(0.83) |
 | SR | Square Root, SQRT(a) | SR(25) |
-| STU | Student T-Distribution |  STU(1) |
+| STU | Student T-Distribution |  STU(1, 10) |
 | TAN | Tangent in radians | TAN(0.35) |
 | TAU | Full rotation in radians 6.28 | TAU |
 | X2 | Square, a * a |  X2(3) |
