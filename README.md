@@ -84,6 +84,7 @@ Enter an empty line.
 | LG | Base 10 Logarithm, 10 ^ a |  LG(25) |
 | LN | Natural Logarithm, e ^ a | LN(35) |
 | NCR | Combinations | NCR(6, 2) |
+| ND | Normal Disribution | ND(0.25, 0, 1) |
 | NPR | Permutations | NPR(6, 2) |
 | P2 | Power of two, 2 ^ a | P2(6) |
 | PD | Prime Divisor | PD(55555) |
