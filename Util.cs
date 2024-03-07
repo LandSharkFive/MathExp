@@ -177,7 +177,7 @@ namespace RpnOne
             string str = "A ACOS ASIN ATAN ALG ALN CB CDF COS CL CR DEG EN F";
             list.AddRange(str.Split(" ").ToList());
 
-            str = "FL GCF I LCM LG LN MIN MAX NCR NPR PD P2 PI R RAD RAN";
+            str = "FL GCF I LCM LG LN MIN MAX NCR ND NPR PD P2 PI R RAD RAN";
             list.AddRange(str.Split(" ").ToList());
 
             str = "RD RND RT S SIN SQ SR STU TAN TAU X2 X3";
@@ -208,7 +208,7 @@ namespace RpnOne
                 return 0;
             }
 
-            double x, y;
+            double x, y, z;
             string msg;
 
             Stack<double> numStk = new Stack<double>();
@@ -361,6 +361,13 @@ namespace RpnOne
                         y = numStk.Pop();
                         x = numStk.Pop();
                         result = Combinations(x, y);
+                        numStk.Push(result);
+                        break;
+                    case "ND":
+                        z = numStk.Pop();
+                        y = numStk.Pop();
+                        x = numStk.Pop();
+                        result = Normal(x, y, z);
                         numStk.Push(result);
                         break;
                     case "NPR":
@@ -591,13 +598,35 @@ namespace RpnOne
             return 0;
         }
 
+        /// <summary>
+        /// Combinations
+        /// </summary>
+        /// <param name="n">total</param>
+        /// <param name="r">selected</param>
+        /// <returns></returns>
         private double Combinations(double n, double r)
         {
+            if (n > 170.0 || r > 170.0)
+            {
+                return 0;
+            }
+
             return Factorial(n) / (Factorial(r) * Factorial(n - r));
         }
 
+        /// <summary>
+        /// Permutations
+        /// </summary>
+        /// <param name="n">total</param>
+        /// <param name="r">selected</param>
+        /// <returns></returns>
         private double Permutations(double n, double r)
         {
+            if (n > 170.0 || r > 170.0)
+            {
+                return 0;
+            }
+
             return Factorial(n) / Factorial(n - r);
         }
 
@@ -725,6 +754,19 @@ namespace RpnOne
                 return (1.0 - p) / 2;
             }
         } // Gauss()
+
+        /// <summary>
+        /// Normal Distribution (pdf)
+        /// </summary>
+        /// <param name="x">x</param>
+        /// <param name="mean">mean</param>
+        /// <param name="std">standard deviation</param>
+        /// <returns>probability</returns>
+        private static double Normal(double x, double mean, double std)
+        {
+            double tmp = 1 / ((Math.Sqrt(2 * Math.PI) * std));
+            return tmp * Math.Exp(-0.5 * Math.Pow((x - mean) / std, 2));
+        }
 
 
     }
