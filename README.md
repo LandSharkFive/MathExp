@@ -198,5 +198,7 @@ Enter an empty line.
 
 ## Credits
 
-1. James McCaffrey, "The Normal Cumulative Density Function in C#", jamesmccaffrey.wordpress.com, 2014.
+```
+1. James McCaffrey, "The Normal Cumulative Density Function in C#", http://jamesmccaffrey.wordpress.com, 2014.
+```
 
