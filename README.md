@@ -1,10 +1,10 @@
 # Math Expressions Calculator
 
-This project contains a command line expression calculator.  The application reads one line at a time from the command line and calculates a result.  The result is printed to the screen.  The main function is called Eval().  Eval() takes the math expression and does three operations:  1. Tokenize() 2. InfixToPostFix() 3. EvalPostFix().  You can use Copy and Paste (Ctrl-C and Shift-Insert) on the command line.  
+This project contains a command line expression calculator.  The application reads one line at a time from the command line and calculates a result.  The result is printed to the screen.  The main function is called Eval().  Eval() takes the math expression and does three operations:  Tokenize(), InfixToPostFix() and EvalPostFix().  Use Copy and Paste (Ctrl-C and Shift-Insert) on the command line as needed.
 
 ## Install and Build
 
-The is a C# Console-Mode Project. Use Visual Studio 2022 and above to compile. 
+The is a C# Console-Mode Project.  Open with  Visual Studio 2022 and above to compile. 
 
 ## Description:
 
@@ -16,25 +16,10 @@ Shell
 RpnOne
 ```
 
-Read File
+Input File
 ```
 RpnOne [inFile]
 Input File is optional.
-```
-
-Do Math on Command-Line in PowerShell
-```
-echo "1 + 2" | ./rpnone
-> 1 + 2
-3
-```
-
-Do Math on Command-Line in CMD
-```
-echo 1 + 2 | rpnone
-> 1 + 2
-3
->
 ```
 
 Help
@@ -134,14 +119,14 @@ Enter an empty line.
 2413.2
 ```
 
-### Get Cosine of 45 degrees
+### Cosine of 45 degrees
 
 ```
 > COS(RAD(45))
 0.7071067811865476
 ```
 
-### Simple Negation
+### Negation
 
 ```
 > -2 * 5
@@ -211,10 +196,7 @@ Enter an empty line.
  Assert.AreEqual("22.1 * 17.4 - 66.45", result);
 ```
 
+## Credits
 
-
-
-
-
-
+1. James McCaffrey, "The Normal Cumulative Density Function in C#", jamesmccaffrey.wordpress.com, 2014.
 
