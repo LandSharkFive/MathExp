@@ -1,204 +1,58 @@
-# Math Expressions Calculator
+# 🧮 Math Gone Wild: Expression Calculator
 
-This project contains a command line expression calculator.  The application reads one line at a time from the command line and calculates a result.  The result is printed to the screen.  The main function is called Eval().  Eval() takes the math expression and does three operations:  Tokenize(), InfixToPostFix() and EvalPostFix().  Use Copy and Paste (Ctrl-C and Shift-Insert) on the command line as needed.
+A robust C# command-line utility for evaluating complex mathematical expressions. The engine converts standard infix notation into RPN (Reverse Polish Notation) for high-precision calculation.
 
-## Install and Build
+## 🚀 Quick Start
 
-The is a C# Console-Mode Project.  Open with  Visual Studio 2022 and above to compile. 
+**Prerequisites:** Visual Studio 2022+ 
 
-## Description:
+1. Open the solution file in Visual Studio.
+2. Build the project (**Ctrl+Shift+B**).
+3. Run via CLI:
 
-  Command-Line Calculator.  Calculate one math expression per line.
-
-## Usage:
-Shell
-```
+# Interactive mode
 RpnOne
-```
 
-Input File
-```
+# Process a file
 RpnOne [inFile]
-Input File is optional.
-```
 
-Help
-```
+# Help
 RpnOne -h
-```
 
- 
-## Exit Application
-```
-Enter an empty line.
-```
-   
+## 🛠️ The Eval() Engine
+The core logic resides in the `Eval()` method, which processes math expressions through a three-stage pipeline to ensure high precision:
 
-## Unit Tests
+1.  **Tokenize()**: Segments the input string into operands, operators, and functions.
+2.  **InfixToPostFix()**: Converts standard notation into Reverse Polish Notation (RPN) using the Shunting-yard algorithm.
+3.  **EvalPostFix()**: Executes the calculation by processing the RPN stack.
 
-  Unit Tests are included.
+---
 
-## Operators
+## 🔢 Operator Reference
 
-| Operator | Description | Example |
-| --- | --- | --- |
-| + | Add | 1 + 2 |
-| - | Subtract | 5 - 2 |
-| * | Multiply | 2 * 7 |
-| / | Divide | 30 / 3 |
-| % | Modulus | 15 % 3 |
-| ^ | Power, a ^ b | 3 ^ 2 |
-| @ | Negate | -5 |
-| ! | Factorial | 6! |
-| A |  Asolute Value | A(-5) |
-| ACOS | Anti-Cosine | ACOS(0.3) |
-| ASIN | Anti-Sine | ASIN(0.4) |
-| ATAN | Anti-Tangent | ATAN(0.5) |
-| CB | Cube, a ^ 3 | CB(5) |
-| CDF | Cumulative Density Function |  CDF(0.5) |
-| CL | Ceiling | CL(7.25) |
-| COS | Cosine in radians | COS(0.6) |
-| CR | Cube root, EXP(a, 1 / 3) |  CR(15) |
-| DEG | Radians To Degrees | DEG(45) |
-| EN | Euler's Number 2.71 | EN |
-| F | Fraction |  F(2.34) |
-| FL | Floor |  FL(7.63) |
-| GCF | Greatest Common Factor |  GCF(3, 21) |
-| I | Integer |  I(72.34) |
-| LCM | Least Common Multiple |  LCM(5, 125) |
-| LG | Base 10 Logarithm, 10 ^ a |  LG(25) |
-| LN | Natural Logarithm, e ^ a | LN(35) |
-| NCR | Combinations | NCR(6, 2) |
-| ND | Normal Disribution | ND(0.25, 0, 1) |
-| NPR | Permutations | NPR(6, 2) |
-| P2 | Power of two, 2 ^ a | P2(6) |
-| PD | Prime Divisor | PD(55555) |
-| PI | Half rotation in radians 3.14 | PI |
-| R | Reciprocal, 1 / x |  R(16.25) |
-| RAD | Degrees To Rdians |  RAD(0.785) |
-| RAN | Random Integer | RAN |
-| RD | Round | RD(3.34) |
-| RND | Random Double Between One and Zero | RND |
-| RT | Nth Root, EXP(a, 1 / b) |  RT(38, 4)
-| S | Change Sign | S(-5) |
-| SIN | Sine in radians |  SIN(0.83) |
-| SR | Square Root, SQRT(a) | SR(25) |
-| STU | Student T-Distribution |  STU(1, 10) |
-| TAN | Tangent in radians | TAN(0.35) |
-| TAU | Full rotation in radians 6.28 | TAU |
-| X2 | Square, a * a |  X2(3) |
-| X3 | Cube, a ^ 3 | X3(5) |
+| Category | Operators | Examples |
+| :--- | :--- | :--- |
+| **Basic** | `+`, `-`, `*`, `/`, `%`, `^`, `@` (Negate) | `15 % 3`, `3 ^ 2` |
+| **Trig** | `SIN`, `COS`, `TAN`, `ACOS`, `ASIN`, `ATAN` | `COS(RAD(45))` |
+| **Roots/Log** | `SR` (Sqrt), `CR` (Cube), `RT` (Nth), `LN`, `LG` | `RT(38, 4)` |
+| **Theory** | `GCF`, `LCM`, `PD` (Prime Divisor), `!` | `GCF(3, 21)` |
+| **Probability**| `NCR`, `NPR`, `ND`, `CDF`, `STU` | `NCR(6, 2)` |
+| **Constants** | `PI`, `TAU`, `EN` (Euler's Number) | `6 * PI` |
+| **Rounding** | `CL` (Ceiling), `FL` (Floor), `RD`, `I` (Int) | `CL(7.25)` |
+| **Other** | `DEG`, `RAD`, `RAN` (Int), `RND` (0-1) | `RAD(180)` |
 
-## EXAMPLES
+---
 
-### Add 1 and 2
+## 💻 Programmatic Binding
+You can inject variables into expressions dynamically at the source level using the `Util` class. This is perfect for automation or templated math.
 
-```
-> 1 + 2
-3
-```
+```csharp
+var str = "A * B - C";
+Util util = new Util();
 
-### Subtract 5 - 3
+// Bind values to placeholders
+string result = util.Bind(str, "A", 22.1);
+result = util.Bind(result, "B", 17.4);
+result = util.Bind(result, "C", 66.45);
 
-```
-> 5 - 3
-2
-```
-
-### Multipy 4 and 5
-
-```
-> 4 * 5
-20
-```
-
-### Add and Subtract Groups of Numbers
-
-```
-> ((44.3 * 55) + (2 * 5) - 33.3)
-2413.2
-```
-
-### Cosine of 45 degrees
-
-```
-> COS(RAD(45))
-0.7071067811865476
-```
-
-### Negation
-
-```
-> -2 * 5
--10
-```
-
-### Negation for Groups
-
-```
-> -(2 * 5)
--10
-```
-
-### Least Common Multiple
-
-```
-> LCM(13342, 234334)
-1563242114
-```
-
-
-### Greatest Common Factor
-
-```
-> GCF(13342, 234334)
-2
-```
-
-### Pi
-
-```
-> 6 * PI
-18.84955592153876
-```
-
-### Eulers Number
-
-```
-> EN
-2.718281828459045
-```
-
-### Simple Math
-
-```
-> 40-(1+2)
-37
-```
-
-### Random Number
-
-```
-> RND
-0.3398089438635673
-```
-
-## Binding Variables
-
-  Variables can be bound at the source code level.  Use the Bind() function.
-
-```
- var str = "A * B - C";
- Util util = new Util();
- string result = util.Bind(str, "A", 22.1);
- result = util.Bind(result, "B", 17.4);
- result = util.Bind(result, "C", 66.45);
- Assert.AreEqual("22.1 * 17.4 - 66.45", result);
-```
-
-## Credits
-
-```
-1. James McCaffrey, "The Normal Cumulative Density Function in C#", http://jamesmccaffrey.wordpress.com, 2014.
-```
-
+// Final output: "22.1 * 17.4 - 66.45"
